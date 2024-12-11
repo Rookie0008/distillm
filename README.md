@@ -48,52 +48,79 @@ We provide example commands for transformer_iwslt_de_en model.
 ### Train base model on iwslt14-de-en dataset
 train student model:
 ```bash
-bash bin/student_model.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/student_model.sh
+# 手动传参
+bash bin/student_model.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
 train junior teacher model:
 ```bash
-bash bin/junior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/junior_teacher.sh
+# 手动传参
+bash bin/junior_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
 train senior teacher model:
 ```bash
-bash bin/senior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/senior_teacher.sh
+# 手动传参
+bash bin/senior_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
 ### Distillation
 
 train  junior student model:
 ```bash
-bash bin/junior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/junior_student.sh
+# 手动传参
+bash bin/junior_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 train senior student model:
 ```bash
-bash bin/senior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/senior_student.sh
+# 手动传参
+bash bin/senior_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 train master student model:
 ```bash
-bash bin/master_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/master_student.sh
+# 手动传参
+bash bin/master_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${JUNIOR_STUDENT_MODEL_PATH} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 ### Run Evaluation
 ```bash
-bash bin/eval_model.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
+# 默认参数
+bash bin/eval_model.sh
+# 手动传参
+bash bin/eval_model.sh ${BEST_MODEL_PATH} ${LOG_FILE} ${DATA_SET_DIR}
 ```
 
 ## TAKD
 ### Train assistant teacher model on iwslt14-de-en dataset
-train student model:
+train teacher model:
 ```bash
-bash bin/TAKD_assistant_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/TAKD_assistant_teacher.sh
+# 手动传参
+bash bin/TAKD_assistant_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 ### Distillation
-train junior teacher model:
+train student model:
 ```bash
-bash bin/TAKD_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+# 默认参数
+bash bin/TAKD_student.sh
+# 手动传参
+bash bin/TAKD_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 
