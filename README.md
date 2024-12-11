@@ -41,11 +41,11 @@ fairseq-preprocess --source-lang de --target-lang en \
 ```
 
 
-## Train
+## Evolving Knowledge Distillation
 We provide example commands for transformer_iwslt_de_en model. 
 
 
-## Train base model on iwslt14-de-en dataset
+### Train base model on iwslt14-de-en dataset
 train student model:
 ```bash
 bash bin/student_model.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
@@ -61,7 +61,7 @@ train senior teacher model:
 bash bin/senior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-## Distillation
+### Distillation
 
 train  junior student model:
 ```bash
@@ -78,11 +78,26 @@ train master student model:
 bash bin/master_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-
-## Run Evaluation
+### Run Evaluation
 ```bash
 bash bin/eval_model.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
 ```
+
+## TAKD
+### Train assistant teacher model on iwslt14-de-en dataset
+train student model:
+```bash
+bash bin/TAKD_assistant_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+```
+
+### Distillation
+train junior teacher model:
+```bash
+bash bin/TAKD_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+```
+
+
+
 
 ## Results
 DistiLLM outperforms other KD baselines in terms of both generation performance and training speed for various model families such as GPT-2, OPT, and OpenLLaMA.
