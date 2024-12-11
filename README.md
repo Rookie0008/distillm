@@ -15,6 +15,25 @@ KAIST AI and Microsoft
 bash install.sh
 ```
 
+# Requirements and Installation
+
+* [PyTorch](http://pytorch.org/) version >= 1.10.0
+* Python version = 3.8
+* For training new models, you'll also need an NVIDIA GPU and [NCCL](https://github.com/NVIDIA/nccl)
+* **To install fairseq** and develop locally:
+
+``` bash
+git clone https://github.com/pytorch/fairseq
+cd fairseq
+pip install --editable ./
+pip install sacremoses
+pip install sacrebleu==1.5.1
+
+# on MacOS:
+# CFLAGS="-stdlib=libc++" pip install --editable ./
+```
+
+
 Our code is based on [this commit](https://github.com/huggingface/transformers/commit/85fde09c97213bf7e8625f83096bb2a9e183f987) of HuggingFace Transformers **by following MiniLLM**.
 
 ## Data
