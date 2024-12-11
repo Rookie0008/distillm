@@ -33,64 +33,47 @@ Refer to the [Fairseq Official Documentation](https://fairseq.readthedocs.io/en/
 Follow the instructions provided in the documentation to prepare your data correctly, ensuring the model can load and train properly.
 
 
-
-
-## Base Pre-trained Models
-To run fine-tuning or standard KD baselines, you need to download the model checkpoints from [Huggingface Model Hub] and put them in `checkpoints/`. For example, for gpt2-large, you can download the model from this [link](https://huggingface.co/gpt2-large/tree/main) and put them in `checkpoints/gpt2-large`.
-
 Alternatively, you can also change the `CKPT` variable in each script to the corresponding model name to enable Transformers to download the base models automatically. For example, set `CKPT="gpt2-large"` in `scripts/gpt2/sft/sft_large.sh` causes download of the gpt2-large base model from the HugginFace model hub.
 
-## Train
-We provide example commands for GPT-2 models. Similar scripts for model families can be found in `scripts/opt` and `scripts/openllama2`. All our experiments are conducted on 4 \* 40A100, which can be reduced for small models.
+# Train
+We provide example commands for transformer_iwslt_de_en model. 
 
-### Baselines
-The final checkpoints are selected by the **ROUGE-L** scores.
+# Baselines
+The final checkpoints are selected by the **BLEU** scores.
 
-#### Fine-tune the teacher models
+## Train base model on iwslt14-de-en dataset
+train student model:
 ```bash
-bash scripts/gpt2/sft/sft_xlarge.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-#### SFT Baselines
-```bash
-bash scripts/gpt2/sft/sft_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/sft/sft_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/sft/sft_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+./bin/student_model.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-#### KD Baselines
+train junior teacher model:
 ```bash
-bash scripts/gpt2/kd/kd_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/kd/kd_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/kd/kd_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+./bin/junior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-#### SeqKD Baselines
-Generate and process responses with the teacher:
+train senior teacher model:
 ```bash
-bash scripts/gpt2/tools/generate_data_seqkd.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/tools/process_pseudo_data_seqkd.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-Fine-tune the model with SeqKD:
-```bash
-bash scripts/gpt2/seqkd/seqkd_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/seqkd/seqkd_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/seqkd/seqkd_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+./bin/senior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-#### Student Initialization
-The final checkpoints are selected by the **validation loss**.
+## Distillation
+
+train  junior student model:
 ```bash
-bash scripts/gpt2/init/init_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+./bin/junior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
-#### ImitKD Baselines
+train senior student model:
 ```bash
-bash scripts/gpt2/imitkd/imitkd_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/imitkd/imitkd_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/imitkd/imitkd_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+./bin/senior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
+
+train master student model:
+```bash
+./bin/master_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+```
+
 
 #### MiniLLM Baselines
 ```bash
