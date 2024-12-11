@@ -1,11 +1,11 @@
-# DistiLLM: Towards Streamlined Distillation for Large Language Models (ICML 2024)
+# Evolving Knowledge Distillation for Lightweight Neural Machine Translation
 
 <a href="https://arxiv.org/abs/2402.03898"><img src="https://img.shields.io/badge/Paper-arXiv:2402.03898-Green"></a>
 
 
-Official PyTorch implementation of **DistiLLM**, as presented in our paper: \
+Official PyTorch implementation of **Evolving Knowledge Distillation**, as presented in our paper: \
 \
-**DistiLLM: Towards Streamlined Distillation for Large Language Models** \
+**Evolving Knowledge Distillation for Lightweight Neural Machine Translation** \
 *[Jongwoo Ko](https://sites.google.com/view/jongwooko), [Sungnyun Kim](https://sungnyunkim.notion.site/Sungnyun-Kim-4770a0182c47469ebdcd357cde97bd32), Tianyi Chen, Se-Young Yun* \
 KAIST AI and Microsoft
 
@@ -28,54 +28,60 @@ pip install sacrebleu==1.5.1
 # CFLAGS="-stdlib=libc++" pip install --editable ./
 ```
 
-# Data
-Refer to the [Fairseq Official Documentation](https://fairseq.readthedocs.io/en/latest/getting_started.html#data-pre-processing) for detailed steps on data preprocessing.
-Follow the instructions provided in the documentation to prepare your data correctly, ensuring the model can load and train properly.
+## Data acquisition and processing
+Here is an example of data acquisition and processing for the IWSLT 2014 (German-English) dataset. For the acquisition and processing of other datasets, you can refer to this example. 
+``` bash
+cd examples/translation/
+bash prepare-iwslt14.sh
+cd ../..
+TEXT=examples/translation/iwslt14.tokenized.de-en
+fairseq-preprocess --source-lang de --target-lang en \
+    --trainpref $TEXT/train --validpref $TEXT/valid --testpref $TEXT/test \
+    --destdir data-bin/iwslt14.tokenized.de-en
+```
 
 
-# Train
+## Train
 We provide example commands for transformer_iwslt_de_en model. 
 
-# Baselines
-The final checkpoints are selected by the **BLEU** scores.
 
 ## Train base model on iwslt14-de-en dataset
 train student model:
 ```bash
-./bin/student_model.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/student_model.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 train junior teacher model:
 ```bash
-./bin/junior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/junior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 train senior teacher model:
 ```bash
-./bin/senior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/senior_teacher.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 ## Distillation
 
 train  junior student model:
 ```bash
-./bin/junior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/junior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 train senior student model:
 ```bash
-./bin/senior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/senior_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 train master student model:
 ```bash
-./bin/master_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
+bash bin/master_student.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
 ```
 
 
 ## Run Evaluation
 ```bash
-./bin/eval_model.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
+bash bin/eval_model.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
 ```
 
 ## Results
