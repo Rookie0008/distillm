@@ -20,7 +20,7 @@ bash install.sh
 * [PyTorch](http://pytorch.org/) version >= 1.10.0
 * Python version = 3.8
 * For training new models, you'll also need an NVIDIA GPU and [NCCL](https://github.com/NVIDIA/nccl)
-* **To install fairseq** and develop locally:
+* To install and develop locally:
 
 ``` bash
 git clone https://github.com/pytorch/fairseq
