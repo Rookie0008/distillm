@@ -10,11 +10,6 @@ Official PyTorch implementation of **DistiLLM**, as presented in our paper: \
 KAIST AI and Microsoft
 
 
-## Environment
-```bash
-bash install.sh
-```
-
 # Requirements and Installation
 
 * [PyTorch](http://pytorch.org/) version >= 1.10.0
@@ -33,33 +28,12 @@ pip install sacrebleu==1.5.1
 # CFLAGS="-stdlib=libc++" pip install --editable ./
 ```
 
-
-Our code is based on [this commit](https://github.com/huggingface/transformers/commit/85fde09c97213bf7e8625f83096bb2a9e183f987) of HuggingFace Transformers **by following MiniLLM**.
-
-## Data
-### Resources
-+ The training/evaluation intruction-response data before processing can be downloaded from this [link](https://conversationhub.blob.core.windows.net/beit-share-public/MiniLLM/data.tar?sv=2021-10-04&st=2023-06-08T11%3A16%3A02Z&se=2033-06-09T11%3A16%3A00Z&sr=c&sp=r&sig=N4pfCVmSeq4L4tS8QbrFVsX6f6q844eft8xSuXdxU48%3D).
-+ The plain-text corpus $\mathcal{D}_\text{PT}$ can be download from the HugginFace datasets [repository](https://huggingface.co/datasets/openwebtext).
+# Data
+Refer to the [Fairseq Official Documentation](https://fairseq.readthedocs.io/en/latest/getting_started.html#data-pre-processing) for detailed steps on data preprocessing.
+Follow the instructions provided in the documentation to prepare your data correctly, ensuring the model can load and train properly.
 
 
-### Data Processing
-Get plain-text corpus $\mathcal{D}_\text{PT}$:
-```bash
-python3 tools/get_openwebtext.py
-```
-This script will replace the continuous `\n` in each document with a special token "<@x(x!>" and write each document in OpenWebText in a line, which is convenient for parallel processing. In `data/openwebtext/data.txt`, we give an example of the resulting format. You can follow this format to prepare other corpus beyond OpenWebText.
 
-Tokenize the data and store them in binary files:
-```bash
-bash scripts/gpt2/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/gpt2/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Train / Validation Data
-
-bash scripts/opt/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/opt/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
-
-bash scripts/llama/tools/process_data_dolly.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process Dolly Train / Validation Data
-bash scripts/llama/tools/process_data_pretrain.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM} # Process OpenWebText Corpus Train / Validation Data
-```
 
 ## Base Pre-trained Models
 To run fine-tuning or standard KD baselines, you need to download the model checkpoints from [Huggingface Model Hub] and put them in `checkpoints/`. For example, for gpt2-large, you can download the model from this [link](https://huggingface.co/gpt2-large/tree/main) and put them in `checkpoints/gpt2-large`.
