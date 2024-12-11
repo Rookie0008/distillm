@@ -33,8 +33,6 @@ Refer to the [Fairseq Official Documentation](https://fairseq.readthedocs.io/en/
 Follow the instructions provided in the documentation to prepare your data correctly, ensuring the model can load and train properly.
 
 
-Alternatively, you can also change the `CKPT` variable in each script to the corresponding model name to enable Transformers to download the base models automatically. For example, set `CKPT="gpt2-large"` in `scripts/gpt2/sft/sft_large.sh` causes download of the gpt2-large base model from the HugginFace model hub.
-
 # Train
 We provide example commands for transformer_iwslt_de_en model. 
 
@@ -75,40 +73,9 @@ train master student model:
 ```
 
 
-#### MiniLLM Baselines
-```bash
-bash scripts/gpt2/minillm/train_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/minillm/train_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/minillm/train_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-
-#### GKD Baselines
-```bash
-bash scripts/gpt2/gkd/gkd_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/gkd/gkd_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/gkd/gkd_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-
-### DistiLLM
-The final checkpoints are selected by the **validation loss**.
-```bash
-bash scripts/gpt2/init/init_base.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_medium.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/init/init_large.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-
-The final checkpoints are selected by the **ROUGE-L** scores.
-```bash
-bash scripts/gpt2/distillm/train_base_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/distillm/train_medium_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-bash scripts/gpt2/distillm/train_large_xl.sh ${/PATH/TO/DistiLLM} ${MASTER_PORT} ${GPU_NUM}
-```
-
 ## Run Evaluation
 ```bash
-bash scripts/gpt2/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
-bash scripts/opt/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM} 
-bash scripts/openllama2/eval/run_eval.sh ${GPU_IDX} ${/PATH/TO/DistiLLM} 
+./bin/eval_model.sh ${GPU_IDX} ${/PATH/TO/DistiLLM}
 ```
 
 ## Results
@@ -133,8 +100,7 @@ If you find this repo useful for your research, please consider citing our paper
 ```
 @inproceedings{kodistillm,
   title={DistiLLM: Towards Streamlined Distillation for Large Language Models},
-  author={Ko, Jongwoo and Kim, Sungnyun and Chen, Tianyi and Yun, Se-Young},
-  booktitle={Forty-first International Conference on Machine Learning}
+  author={Ko, Jongwoo and Kim, Sungnyun and Chen, Tianyi and Yun, Se-Young}
 }
 ```
 
