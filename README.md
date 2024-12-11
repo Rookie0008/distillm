@@ -1,7 +1,7 @@
 # DistiLLM: Towards Streamlined Distillation for Large Language Models (ICML 2024)
 
 <a href="https://arxiv.org/abs/2402.03898"><img src="https://img.shields.io/badge/Paper-arXiv:2402.03898-Green"></a>
-<a href=#bibtex><img src="https://img.shields.io/badge/Paper-BibTex-yellow"></a>
+
 
 Official PyTorch implementation of **DistiLLM**, as presented in our paper: \
 \
@@ -9,11 +9,6 @@ Official PyTorch implementation of **DistiLLM**, as presented in our paper: \
 *[Jongwoo Ko](https://sites.google.com/view/jongwooko), [Sungnyun Kim](https://sungnyunkim.notion.site/Sungnyun-Kim-4770a0182c47469ebdcd357cde97bd32), Tianyi Chen, Se-Young Yun* \
 KAIST AI and Microsoft
 
-## 🚀 Updates
-
-- [x] (24.08.12) Remove the dependency on the local transformers, which are outdated. You can work with various types of recent LLMs!
-- [x] (24.05.01) Our paper has been accepted in **ICML 2024**. We are open to receiving any discussions and will reflect them in the camera-ready version. Looking forward to seeing you in Vienna!
-- [x] (24.03.13) Release [**LoRA checkpoints for OpenLLaMa2-3B**](https://drive.google.com/drive/folders/1Yun1aNpn-mz2h-IVH_VdJ1Jhzm0K55Bo?usp=sharing)
 
 ## Environment
 ```bash
