@@ -48,25 +48,25 @@ We provide example commands for transformer_iwslt_de_en model.
 ### Train base model on iwslt14-de-en dataset
 train student model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/student_model.sh
-# 手动传参
+# manual parameter passing
 bash bin/student_model.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
 train junior teacher model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/junior_teacher.sh
-# 手动传参
+# manual parameter passing
 bash bin/junior_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
 train senior teacher model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/senior_teacher.sh
-# 手动传参
+# manual parameter passing
 bash bin/senior_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MAX_EPOCH}
 ```
 
@@ -74,33 +74,33 @@ bash bin/senior_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${MODEL} ${MA
 
 train  junior student model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/junior_student.sh
-# 手动传参
+# manual parameter passing
 bash bin/junior_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 train senior student model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/senior_student.sh
-# 手动传参
+# manual parameter passing
 bash bin/senior_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 train master student model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/master_student.sh
-# 手动传参
+# manual parameter passing
 bash bin/master_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${JUNIOR_STUDENT_MODEL_PATH} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 ### Run Evaluation
 ```bash
-# 默认参数
+# default parameter
 bash bin/eval_model.sh
-# 手动传参
+# manual parameter passing
 bash bin/eval_model.sh ${BEST_MODEL_PATH} ${LOG_FILE} ${DATA_SET_DIR}
 ```
 
@@ -108,22 +108,20 @@ bash bin/eval_model.sh ${BEST_MODEL_PATH} ${LOG_FILE} ${DATA_SET_DIR}
 ### Train assistant teacher model on iwslt14-de-en dataset
 train teacher model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/TAKD_assistant_teacher.sh
-# 手动传参
+# manual parameter passing
 bash bin/TAKD_assistant_teacher.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
 
 ### Distillation
 train student model:
 ```bash
-# 默认参数
+# default parameter
 bash bin/TAKD_student.sh
-# 手动传参
+# manual parameter passing
 bash bin/TAKD_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL_PATH} ${MODEL} ${MAX_EPOCH}
 ```
-
-
 
 
 ## Results
@@ -132,15 +130,10 @@ DistiLLM outperforms other KD baselines in terms of both generation performance 
 <img width="1394" src="https://github.com/jongwooko/distillm/assets/59277369/19ddac5c-4cd6-4d81-99d8-32723a8e60d8">
 </p>
 
-## Checkpoints (OpenLLaMA-3B)
-We share the LoRA weights for OpenLLaMA-3B in [google drive](https://drive.google.com/drive/folders/1Yun1aNpn-mz2h-IVH_VdJ1Jhzm0K55Bo?usp=sharing).
 
 ## Acknowledgement
 Our code is based on the code of ICLR2024 [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/pdf/2306.08543.pdf).
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=jongwooko/distillm&type=Date)](https://star-history.com/#jongwooko/distillm&Date)
 
 ## BibTeX
 If you find this repo useful for your research, please consider citing our paper:
