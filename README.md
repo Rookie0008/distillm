@@ -10,7 +10,7 @@ Official PyTorch implementation of **Evolving Knowledge Distillation**, as prese
 KAIST AI and Microsoft
 
 
-# Runtime Environment
+## Runtime Environment
 
 * [PyTorch](http://pytorch.org/) version >= 1.10.0
 * Python version = 3.8
