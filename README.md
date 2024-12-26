@@ -19,7 +19,7 @@ KAIST AI and Microsoft
 
 ``` bash
 git clone https://github.com/pytorch/fairseq
-cd fairseq
+cd EKD-code
 pip install --editable ./
 pip install sacremoses
 pip install sacrebleu==1.5.1
@@ -125,14 +125,11 @@ bash bin/TAKD_student.sh ${SAVE_DIR} ${LOG_FILE} ${DATA_SET_DIR} ${TEACHER_MODEL
 
 
 ## Results
-DistiLLM outperforms other KD baselines in terms of both generation performance and training speed for various model families such as GPT-2, OPT, and OpenLLaMA.
-<p align="center">
-<img width="1394" src="https://github.com/jongwooko/distillm/assets/59277369/19ddac5c-4cd6-4d81-99d8-32723a8e60d8">
-</p>
+
 
 
 ## Acknowledgement
-Our code is based on the code of ICLR2024 [MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/pdf/2306.08543.pdf).
+
 
 
 ## BibTeX
